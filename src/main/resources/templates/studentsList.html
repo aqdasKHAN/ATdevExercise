@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List</title>
+    <style>
+        /* Basic styling for demonstration purposes */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .delete-btn, .update-btn {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .delete-btn {
+            background-color: #ff3333;
+            color: white;
+            border-radius: 5px;
+        }
+        .update-btn {
+            background-color: #33cc33;
+            color: white;
+            border-radius: 5px;
+        }
+        #add-btn {
+            background-color: #0c24b1;
+            color: white;
+            border-radius: 5px;
+            width: 135px;
+            height: 41px;
+            margin-left: 13px;
+            margin-bottom: 13px;
+            margin-top: 13px;
+        }
+    </style>
+</head>
+<body>
+    <button id="add-btn" onclick="location.href='/atdev/addStudent'">Add Student</button>
+    <table>
+        <thead>
+            <tr>
+                <th>SN</th>
+                <th>Student's Name</th>
+                <th>Student's Roll number</th>
+                <th>Student's Standard/class</th>
+                <th>Student's House</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="studnt, indxStdnt: ${stdnt}">
+                <td th:text="${indxStdnt.index + 1}">001</td>
+                <td th:text="${studnt.name}">kerry</td>
+                <td th:text="${studnt.rollNo}">100</td>
+                <td th:text="${studnt.standard}">12</td>
+                <td th:text="${studnt.house}">Red</td>
+                <td>
+                	<button class="delete-btn" th:data-student-id="${studnt.id}" onclick="deleteStudent(this)">Delete</button>
+                </td>
+                <td>
+                	<!--<button class="update-btn" th:onclick="'location.href=\'/students/updating'+${studnt.id}+'\' '">Update</button>-->
+                	<button class="update-btn" th:data-updateStudent-id="${studnt.id}" onclick="updateStudent(this)">Update</button>
+                </td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+    
+    <script>                                              // JavaScript (for demonstration purposes)
+        function deleteStudent(button) {
+        	const id=button.getAttribute('data-student-id');
+        	 // Perform DELETE request using Fetch API
+            fetch(`/atdev/deleting/${id}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Student deleted successfully!');
+                    window.location.reload();
+                } else {
+                    alert('Failed to delete Student.');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting Student:', error);
+            });
+        }
+
+        function updateStudent(button) {
+            const id = button.getAttribute('data-updateStudent-id');
+            // Redirect to the update page
+            window.location.href = `/students/updating/${id}`;
+        }
+    </script> 
+</body>
+</html>

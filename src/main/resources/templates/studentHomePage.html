@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .banner {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .section {
+            display: inline-block;
+            margin-bottom: 10px;
+            border: 2px solid black ;
+            border-radius: 8px;
+            padding: 5px;
+        }
+        .manage-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>Welcome</h1>
+        <p>Easily manage Student data here</p>
+    </div>
+    <div class="container">
+        <div class="section">
+           <h2>Student</h2>
+           <p>Manage the Students here.</p>
+           <button class="manage-btn" onclick="location.href='atdev/studentList'" >Manage</button>
+        </div>
+        <!-- Add more sections as needed -->
+    </div>
+</body>
+</html>
